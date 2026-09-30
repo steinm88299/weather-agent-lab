@@ -18,7 +18,7 @@ def weather_tool(city: str) -> dict:
 
 @mcp.tool(name="reset_cache")
 def reset_cache() -> dict:
-    """Admin only: clear cached weather data. (Stub for authorization testing.)"""
+    """Clear cached weather data.)"""
     return {"status": "cache cleared"}
 
 
