@@ -1,4 +1,11 @@
 # yaml-language-server: $schema=https://agentgateway.dev/schema/config
+frontendPolicies:
+  accessLog:
+    add:
+      user.uid: 'jwt.uid'
+      agent.cid: 'jwt.cid'
+      agent.act: 'jwt.act.sub'
+      token.scp: 'jwt.scp'
 mcp:
   port: 3000
   policies:
