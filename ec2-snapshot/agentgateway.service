@@ -1,0 +1,14 @@
+[Unit]
+Description=agentgateway
+After=network-online.target weather-mcp.service
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/agentgateway
+ExecStart=/usr/local/bin/agentgateway -f /home/ubuntu/agentgateway/config.yaml
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

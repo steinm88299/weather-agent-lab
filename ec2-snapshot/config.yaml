@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://agentgateway.dev/schema/config
+mcp:
+  port: 3000
+  policies:
+    cors:
+      allowOrigins:
+        - "*"
+      allowHeaders:
+        - "*"
+      exposeHeaders:
+        - "Mcp-Session-Id"
+    mcpAuthentication:
+      issuer: https://demo-citizensbank-o4aa.oktapreview.com/oauth2/aus14831p0s2MFyjM1d8
+      audiences:
+        - api://weather-mcp
+      jwks:
+        url: https://demo-citizensbank-o4aa.oktapreview.com/oauth2/aus14831p0s2MFyjM1d8/v1/keys
+      resourceMetadata:
+        resource: http://localhost:3000/mcp
+        scopesSupported:
+          - weather:read
+          - weather:admin
+        bearerMethodsSupported:
+          - header
+    mcpAuthorization:
+      rules:
+      - 'mcp.tool.name == "get_current_weather" && "weather:read" in jwt.scp'
+      - 'mcp.tool.name == "reset_cache" && "weather:admin" in jwt.scp'
+  targets:
+  - name: weather
+    mcp:
+      host: http://127.0.0.1:8000/mcp
